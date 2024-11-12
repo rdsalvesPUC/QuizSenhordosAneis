@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "37905103198",
+    "project_id": "quiz-senhor-dos-aneis",
+    "storage_bucket": "quiz-senhor-dos-aneis.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:37905103198:android:8ddf2262949996f2bcf7cf",
+        "android_client_info": {
+          "package_name": "com.example.quizsenhordosaneis"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBH-bpJIXZfyCnbNMY2XfdD2bRBbD7WNAA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
