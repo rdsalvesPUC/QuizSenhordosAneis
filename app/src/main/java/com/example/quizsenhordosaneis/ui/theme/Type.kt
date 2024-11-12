@@ -1,34 +1,48 @@
 package com.example.quizsenhordosaneis.ui.theme
 
 import androidx.compose.material3.Typography
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
+import com.example.quizsenhordosaneis.R
+
+
+val CustomFontFamily = FontFamily(
+    Font(R.font.domine_regular, FontWeight.Normal),
+    Font(R.font.domine_medium, FontWeight.Medium),
+    Font(R.font.domine_semibold, FontWeight.SemiBold),
+    Font(R.font.domine_bold, FontWeight.Bold),
+)
 
 // Set of Material typography styles to start with
-val Typography = Typography(
+val CustomTypography = Typography(
     bodyLarge = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 16.sp,
-        lineHeight = 24.sp,
-        letterSpacing = 0.5.sp
-    )
-    /* Other default text styles to override
-    titleLarge = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 22.sp,
-        lineHeight = 28.sp,
-        letterSpacing = 0.sp
+        fontSize = 17.sp,
+        fontFamily = FontFamily(Font(R.font.domine_bold)),
+        fontWeight = FontWeight(700),
+        color = Color(0xFF1B2821),
     ),
-    labelSmall = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Medium,
-        fontSize = 11.sp,
-        lineHeight = 16.sp,
-        letterSpacing = 0.5.sp
-    )
-    */
+    headlineSmall = TextStyle(
+        fontSize = 17.sp,
+        fontFamily = FontFamily(Font(R.font.domine_regular)),
+        fontWeight = FontWeight(700),
+        color = Color(0xFF1B2821),
+    ),
+    headlineMedium = TextStyle(
+        fontSize = 22.sp,
+        lineHeight = 28.6.sp,
+        fontFamily = FontFamily(Font(R.font.domine_bold)),
+        fontWeight = FontWeight(700),
+        color = Color(0xFF1B2821),
+    ),
+    headlineLarge = TextStyle(
+        fontSize = 28.sp,
+        fontFamily = FontFamily(Font(R.font.domine_regular)),
+        fontWeight = FontWeight(400),
+        color = Color(0xFF1B2821),
+    ),
 )

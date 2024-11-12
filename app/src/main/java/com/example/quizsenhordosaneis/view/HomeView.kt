@@ -1,12 +1,10 @@
 package com.example.quizsenhordosaneis.view
 
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Typography
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Button
-import androidx.compose.material3.Surface
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -21,6 +19,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.runtime.*
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.quizsenhordosaneis.R
 
 @Composable
@@ -48,9 +47,8 @@ fun TelaInicial(onStartQuiz: (String) -> Unit) {
             painter = painterResource(id = R.drawable.imagem_entrada),
             contentDescription = null,
             modifier = Modifier
-                .size(200.dp)
-                .clip(CircleShape)
-                .border(2.dp, Color.Gray, CircleShape),
+                .size(338.dp)
+                .clip(CircleShape),
             contentScale = ContentScale.Crop
         )
 
@@ -101,4 +99,10 @@ fun TelaInicial(onStartQuiz: (String) -> Unit) {
             )
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewTelaHome() {
+    TelaInicial {}
 }
