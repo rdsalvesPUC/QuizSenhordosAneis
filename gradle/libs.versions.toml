@@ -12,6 +12,7 @@ firebase-bom = "33.5.1"
 retrofit = "2.11.0"
 gsonConverter = "2.11.0"
 room = "2.6.1"
+lifecycleViewmodelComposeAndroid = "2.8.7"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -43,6 +44,7 @@ gson-converter = { group = "com.squareup.retrofit2", name = "converter-gson", ve
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+androidx-lifecycle-viewmodel-compose-android = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose-android", version.ref = "lifecycleViewmodelComposeAndroid" }
 
 
 

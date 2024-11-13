@@ -25,21 +25,30 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.example.quizsenhordosaneis.model.Pergunta
 import com.example.quizsenhordosaneis.ui.theme.CustomTypography
-import kotlin.math.roundToInt
+import com.example.quizsenhordosaneis.viewmodel.PerguntasViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.quizsenhordosaneis.viewmodel.LeaderboardViewModel
 
 @Composable
 fun TelaPerguntas(
-    pergunta: String,
-    opcoes: List<String>,
-    imagemResId: Int,
-    tempoRestante: Int,
-    onOptionSelected: (String) -> Unit,
-    onBackClick: () -> Unit
+    perguntas: List<Pergunta>,
+    userName: String,
+    onBackClick: () -> Unit,
+    onQuizComplete: () -> Unit,
+    viewModel: PerguntasViewModel = viewModel(),
+    leaderboardViewModel: LeaderboardViewModel = viewModel()
 ) {
+    LaunchedEffect(perguntas) {
+        viewModel.setPerguntas(perguntas, userName, onQuizComplete)
+    }
+
+    val currentQuestionIndex by viewModel.currentQuestionIndex.collectAsState()
+    val tempoRestante by viewModel.tempoRestante.collectAsState()
+    val currentQuestion = perguntas[currentQuestionIndex]
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -53,11 +62,12 @@ fun TelaPerguntas(
             IconButton(onClick = onBackClick) {
                 Icon(
                     painter = painterResource(id = R.drawable.leadingicon),
-                    contentDescription = "Voltar"
+                    contentDescription = "Voltar",
+                    tint = Color(0xFF2E8B57)
                 )
             }
             Spacer(modifier = Modifier.weight(1f))
-            Text(text = "Quiz 1", style = CustomTypography.headlineSmall)
+            Text(text = "Quiz", style = CustomTypography.headlineSmall)
             Spacer(modifier = Modifier.weight(1f))
         }
 
@@ -65,7 +75,7 @@ fun TelaPerguntas(
 
         // Texto da pergunta
         Text(
-            text = pergunta,
+            text = currentQuestion.texto,
             style = CustomTypography.headlineLarge,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Left,
@@ -76,7 +86,7 @@ fun TelaPerguntas(
 
         // Imagem da pergunta
         Image(
-            painter = painterResource(id = imagemResId),
+            painter = painterResource(id = R.drawable.imagem_entrada), // Placeholder image
             contentDescription = "Imagem da Pergunta",
             modifier = Modifier
                 .fillMaxWidth()
@@ -107,25 +117,29 @@ fun TelaPerguntas(
                     color = Color.Gray
                 )
             }
-            CircularProgressIndicator(
-                progress = { tempoRestante / 60f },
-                modifier = Modifier.size(56.dp),
-                color = Color(0xFF4CAF50),
-                strokeWidth = 4.dp,
-                trackColor = ProgressIndicatorDefaults.circularIndeterminateTrackColor,
-            )
-            Text(
-                text = "${tempoRestante}s",
-                style = CustomTypography.headlineMedium,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.align(Alignment.CenterVertically)
-            )
+            Box(
+                contentAlignment = Alignment.Center,
+                modifier = Modifier.size(56.dp)
+            ) {
+                CircularProgressIndicator(
+                    progress = { tempoRestante / 60f },
+                    modifier = Modifier.size(56.dp),
+                    color = Color(0xFF4CAF50),
+                    strokeWidth = 4.dp,
+                    trackColor = ProgressIndicatorDefaults.circularIndeterminateTrackColor,
+                )
+                Text(
+                    text = "${tempoRestante}s",
+                    style = CustomTypography.headlineMedium,
+                    fontWeight = FontWeight.Bold,
+                )
+            }
         }
 
         Spacer(modifier = Modifier.height(16.dp))
 
         // Lista de opções de resposta
-        opcoes.forEachIndexed { index, opcao ->
+        currentQuestion.opcoes.forEachIndexed { index, opcao ->
             val letra = 'a' + index
             Card(
                 shape = RoundedCornerShape(24.dp),
@@ -133,7 +147,9 @@ fun TelaPerguntas(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 4.dp)
-                    .clickable { onOptionSelected(opcao) }
+                    .clickable {
+                        viewModel.answerQuestion()
+                    }
             ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
@@ -158,17 +174,4 @@ fun TelaPerguntas(
             }
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewTelaPerguntas() {
-    TelaPerguntas(
-        pergunta = "Qual é o nome do personagem principal?",
-        opcoes = listOf("Frodo", "Aragorn", "Gandalf", "Legolas"),
-        imagemResId = R.drawable.imagem_entrada,
-        tempoRestante = 30,
-        onOptionSelected = {},
-        onBackClick = {}
-    )
 }

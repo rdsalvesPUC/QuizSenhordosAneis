@@ -45,4 +45,10 @@ val CustomTypography = Typography(
         fontWeight = FontWeight(400),
         color = Color(0xFF1B2821),
     ),
+    titleLarge = TextStyle(
+        fontSize = 32.sp,
+        fontFamily = FontFamily(Font(R.font.domine_bold)),
+        fontWeight = FontWeight(700),
+        color = Color(0xFF1B2821),
+    ),
 )
